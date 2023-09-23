@@ -21,6 +21,10 @@ function HomePage() {
     const [amount, setAmount] = useState("");
     const [isDigitizeOpen, setIsDigitizeOpen] = useState(false);
     const [isSearch, setIsSearch] = useState(false);
+    const [isBalanceOpen, setIsBalanceOpen] = useState(false);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
+
 
     const openNotification = () => {
         setIsNotificationOpen(true);
@@ -51,12 +55,40 @@ function HomePage() {
         setIsDigitizeOpen(false);
     };
 
+
+    const openBalance = () => {
+        setIsBalanceOpen(true);
+    };
+    const closeBalance = () => {
+        setIsBalanceOpen(false);
+    };
+
+
+    const openHistory = () => {
+        setIsHistoryOpen(true);
+    };
+    const closeHistory = () => {
+        setIsHistoryOpen(false);
+    };
+
+
+    const openHelp = () => {
+        setIsHelpOpen(true);
+    };
+    const closeHelp = () => {
+        setIsHelpOpen(false);
+    };
+
+
+
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-primary">
             <div className="bg-secondary w-1/2 h-2/3 justify-between rounded-lg shadow-lg text-center flex flex-col items-center ">
                 <div className="bg-gray-700 w-full py-3 rounded-t-lg">
                     <div className="flex justify-between items-center px-4">
-                        <LogoutIcon className="transform rotate-180 cursor-pointer" />
+                        <Link to={'/'}>
+                            <LogoutIcon className="transform rotate-180 cursor-pointer" />
+                        </Link>
                         <NotificationsIcon className="cursor-pointer" onClick={openNotification} />
                     </div>
                 </div>
@@ -88,15 +120,15 @@ function HomePage() {
                 </div>
                 <div className="bg-gray-700 w-full py-3 rounded-t-lg">
                     <div className="flex justify-between items-center px-4">
-                        <div className="flex cursor-pointer flex-col justify-center items-center text-sm">
+                        <div onClick={openBalance} className="flex cursor-pointer flex-col justify-center items-center text-sm">
                             <AccountBalanceWalletIcon />
-                            <p>Balance</p>
+                            <p>Balance </p>
                         </div>
-                        <div className="flex flex-col cursor-pointer justify-center items-center text-sm">
+                        <div onClick={openHistory} className="flex flex-col cursor-pointer justify-center items-center text-sm">
                             <HistoryIcon />
                             <p>History</p>
                         </div>
-                        <div className="flex flex-col cursor-pointer justify-center items-center text-sm">
+                        <div onClick={openHelp} className="flex flex-col cursor-pointer justify-center items-center text-sm">
                             <DeviceUnknownIcon />
                             <p>Help</p>
                         </div>
@@ -155,7 +187,6 @@ function HomePage() {
                         </DialogContent>
                         <DialogActions className="p-4">
                             <Link to={'/map'}>
-
                                 <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
                                     Search
                                 </Button>
@@ -183,7 +214,6 @@ function HomePage() {
                         </DialogContent>
                         <DialogActions className="p-4">
                             <Link to={'/map'}>
-
                                 <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
                                     Search
                                 </Button>
@@ -193,6 +223,80 @@ function HomePage() {
                 </div>
             </Dialog>
 
+            <Dialog open={isBalanceOpen} onClose={closeBalance} maxWidth="sm"  >
+                <DialogTitle className="bg-indigo-600 text-white">Balance</DialogTitle>
+                <div className='flex flex-col gap-2'>
+                    <div className='bg-gray-400 shadow-lg'>
+                        <DialogContent className="p-4">
+                            <p className="text-gray-800">450</p>
+                        </DialogContent>
+                        <DialogActions className="p-4">
+                            <Button onClick={closeBalance} className="bg-red-500 text-white hover:bg-red-600">
+                                close
+                            </Button>
+                        </DialogActions>
+                    </div>
+                </div>
+            </Dialog>
+
+
+
+
+            <Dialog open={isHistoryOpen} onClose={closeHistory} maxWidth="sm">
+                <DialogTitle className="bg-indigo-600 text-white">Payment History</DialogTitle>
+                <div className='flex flex-col gap-2'>
+                    <div className='bg-gray-400 shadow-lg'>
+                        <DialogContent className="p-4 bg-white">
+                            <div className="space-y-2 gap-2">
+                                <ul>
+                                    <li className="bg-gray-100 rounded-lg border border-gray-300 p-4 shadow-md">
+                                        Payment 1: $100 on 2023-09-01
+                                    </li>
+                                    <li className="bg-gray-100 rounded-lg border border-gray-300 p-4 shadow-md">
+                                        Payment 2: $150 on 2023-09-10
+                                    </li>
+                                    <li className="bg-gray-100 rounded-lg border border-gray-300 p-4 shadow-md">
+                                        Payment 3: $200 on 2023-09-20
+                                    </li>
+                                </ul>
+                            </div>
+                        </DialogContent>
+                        <DialogActions className="p-4">
+                            <Button onClick={closeHistory} className="bg-red-500 text-white hover:bg-red-600">
+                                Close
+                            </Button>
+                        </DialogActions>
+                    </div>
+                </div>
+            </Dialog>
+
+            <Dialog open={isHelpOpen} onClose={closeHelp} maxWidth="sm">
+                <DialogTitle className="bg-blue-500 text-white">Help & Emergency Contacts</DialogTitle>
+                <div className='flex flex-col gap-2'>
+                    <div className='bg-gray-200 shadow-lg'>
+                        <DialogContent className="p-4">
+                            <p className="text-gray-800">
+                                Welcome to the Help and Emergency Contacts screen! This is where you can find assistance with using our banking app. In case of emergencies, please contact one of the following numbers:
+                            </p>
+                            <ul className="list-disc pl-6">
+                                <li>Customer Support: 1-800-123-4567</li>
+                                <li>Lost or Stolen Card: 1-800-987-6543</li>
+                                <li>Fraud Hotline: 1-888-555-1234</li>
+                            </ul>
+                            <p className="mt-4">
+                                For general inquiries and support, please use our in-app messaging feature or visit our website at www.abcpaymentsbank.com.
+                            </p>
+                        </DialogContent>
+                        <DialogActions className="p-4">
+                            <Button onClick={closeHelp} className="bg-blue-500 text-white hover:bg-blue-600">
+                                Close
+                            </Button>
+                        </DialogActions>
+                    </div>
+                </div>
+            </Dialog>
+
+            
         </div>
     );
 }
