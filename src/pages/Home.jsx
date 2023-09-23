@@ -14,6 +14,7 @@ import {
     Button,
 } from '@mui/material';
 
+import { Link } from "react-router-dom";
 function HomePage() {
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const [isLiquifyOpen, setIsLiquifyOpen] = useState(false);
@@ -153,9 +154,12 @@ function HomePage() {
                             />
                         </DialogContent>
                         <DialogActions className="p-4">
-                            <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
-                                Search
-                            </Button>
+                            <Link to={'/maps'}>
+
+                                <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
+                                    Search
+                                </Button>
+                            </Link>
                         </DialogActions>
                     </div>
                 </div>
@@ -178,9 +182,12 @@ function HomePage() {
                             />
                         </DialogContent>
                         <DialogActions className="p-4">
-                            <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
-                                Search
-                            </Button>
+                            <Link to={'/maps'}>
+
+                                <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
+                                    Search
+                                </Button>
+                            </Link>
                         </DialogActions>
                     </div>
                 </div>

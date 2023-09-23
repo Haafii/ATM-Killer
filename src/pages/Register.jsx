@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [accountNo, setAccountNo] = useState("");
     const [confAccNo, setConfAccNo] = useState("");
@@ -33,14 +34,14 @@ const Login = () => {
             setError("Failed to send OTP. Please try again."); // Handle error appropriately
         }
 
-        const url = 'http://35.203.92.18:8080/register'; // Replace with the actual URL of your API
+        const url = 'http://35.203.92.18:8080/auth/register'; // Replace with the actual URL of your API
 
         const data = {
             username: name,
             phoneNumber: mobNum,
             accountNumber: accountNo,
         };
-
+        console.log(data)
         fetch(url, {
             method: 'POST',
             headers: {
@@ -55,6 +56,9 @@ const Login = () => {
                 return response.json(); // Parse the JSON response
             })
             .then((responseData) => {
+                if(responseData.result == "AR"){
+                    setError("Mobile number already register")
+                }
                 // Handle the successful response here
                 console.log('Registration successful:', responseData);
             })
@@ -68,11 +72,50 @@ const Login = () => {
     };
 
     const onLogin = (event) => {
+        if(error != NULL){
+            return;
+        }
         setIsLoading(true);
         event.preventDefault();
 
-    };
+        const url = 'http://35.203.92.18:8080/auth/submit-otp'; // Replace with the actual URL of your API
 
+        const data = {
+            otp: otp,
+            phoneNumber: mobNum,
+        };
+        console.log(data)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify that you're sending JSON data
+            },
+            body: JSON.stringify(data), // Convert the data object to a JSON string
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then((responseData) => {
+                if(responseData.result){
+                    navigate("/home");
+                }else{
+                    setIsLoading(false);
+                    setError(responseData.message);
+                    setError("Enter valid otp")
+                }
+                // Handle the successful response here
+                console.log('Registration successful:', responseData);
+            })
+            .catch((error) => {
+                // Handle any errors that occurred during the fetch
+                console.error('Registration failed:', error);
+            });
+
+    };
+    console.log(error);
     return (
         <div className="bg-primary flex flex-col items-center justify-center min-h-screen md:py-2">
             <main className="flex items-center w-full px-2 md:px-20">
@@ -84,7 +127,7 @@ const Login = () => {
                     <h2 className='p-3 text-3xl font-bold text-white'>ATM Killer</h2>
                     <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div>
                     <h3 className='text-xl font-semibold text-white pt-2 mb-2'>Welcome Back</h3>
-                    <form className="mt-8 space-y-6 ">
+                    <form className="flex flex-col mt-8 space-y-6 justify-center items-center">
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
                                 <input
@@ -101,7 +144,7 @@ const Login = () => {
                                 <input
                                     id="accountNo"
                                     name="accountNo"
-                                    type="text"
+                                    type="password"
                                     autoComplete="tel"
                                     required
                                     value={accountNo}

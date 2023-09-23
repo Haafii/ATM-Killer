@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [mobNum,setMobNum] = useState("");
+    const [otp, setOtp] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [otpSent, setOtpSent] = useState(false);
@@ -31,43 +31,7 @@ const Login = () => {
   const onLogin = (event) => {
     setIsLoading(true);
     event.preventDefault();
-    // var formdata = new FormData();
-    // formdata.append("username", username);
-    // formdata.append("password", password);
-
-    // var requestOptions = {
-    //   method: 'POST',
-    //   body: formdata,
-    //   redirect: 'follow'
-    // };
-
-    // Declare the result variable
-    // let result = null;
-
-    // fetch("https://mini-project-mkgl.onrender.com/login", requestOptions)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     result = data; // Assign the response data to the result variable
-    //     // console.log(result);
-    //     // console.log(result.access_token);
-    //     const userId = result.access_token; // User ID received from the server
-    //     // const role = result
-    //     localStorage.setItem('userId', userId);
-    //     // console.log(userId);
-
-    //     // Check if the result meets the condition for validating persons
-    //     if (result && result.access_token && result.access_token.length > 0) {
-    //       navigate("/home");
-    //     } else {
-    //       setError("Invalid username or password")
-    //     }
-    //     setIsLoading(false);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     setError("Login failed. Please try again."); // Set an error message to display on the login page.
-    //     setIsLoading(false);
-    //   });
+   
   };
 
   return (
@@ -81,55 +45,17 @@ const Login = () => {
           <h2 className='p-3 text-3xl font-bold text-white'>ATM Killer</h2>
           <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div>
           <h3 className='text-xl font-semibold text-white pt-2 mb-2'>Welcome Back</h3>
-          {/* <form onSubmit={onLogin}>
-            <div className='flex flex-col items-center justify-center'>
-              <input
-                type='text'
-                className='rounded-2xl px-2 py-1 w-4/5 md:w-full border-[1px]  m-1 focus:shadow-md  focus:outline-none focus:ring-0'
-                placeholder='Mobile Number'
-                onChange={(e) => { setUsername(e.target.value), setError(null), setIsLoading(false) }}
-                required
-                id="username"
-                name="username"
-              />
-              <button className='rounded-2xl my-4 text-white bg-sky-500 w-full px-6 py-2 shadow-md hover:text-secondary hover:bg-sky-600 transition duration-200 ease-in'>send</button>
-              <input
-                type="password"
-                className='rounded-2xl px-2 py-1 w-4/5 md:w-full border-[1px]  m-1 focus:shadow-md  focus:outline-none focus:ring-0'
-                placeholder='OTP'
-                id="password"
-                name="password"
-                onChange={(e) => { setPassword(e.target.value), setError(null), setIsLoading(false) }}
-                required
-              />
-              {error && <div className='text-red-600 text-sm '>{error}</div>}
-              <button
-                type="submit"
-                className='rounded-2xl my-4 text-white bg-sky-500 w-full px-6 py-2 shadow-md hover:text-secondary hover:bg-sky-600 transition duration-200 ease-in'
-                disabled={isLoading} 
-              >
-                {isLoading ? (
-                  <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mx-auto"></div> // Loading spinner
-                ) : (
-                  'Sign In'
-                )}
-              </button>
-            </div>
-          </form> */}
           <form className="mt-8 space-y-6 ">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="mobile-number" className="sr-only">
-                Mobile Number
-              </label>
               <input
-                id="mobile-number"
-                name="mobile-number"
+                id="mobNum"
+                name="mobNum"
                 type="text"
                 autoComplete="tel"
                 required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={mobNum}
+                onChange={(e) => setMobNum(e.target.value)}
                 className="rounded mb-2  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Reg. Mobile Number"
               />
@@ -145,8 +71,8 @@ const Login = () => {
                   type="text"
                   autoComplete="one-time-code"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                   className="rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="OTP"
                 />
@@ -184,7 +110,6 @@ const Login = () => {
             </div>
           )}
         </form>
-          {/* <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div> */}
           <p className='text-white mt-4 text-sm'>Don't have an account?</p>
           <Link
             className='text-white mb-4 text-sm font-medium cursor-pointer'
@@ -198,99 +123,4 @@ const Login = () => {
   )
 }
 export default Login
-
-
-
-// import React, { useState } from "react";
-
-// const LoginPage = () => {
-//   const [mobileNumber, setMobileNumber] = useState("");
-//   const [otp, setOtp] = useState("");
-//   const [otpSent, setOtpSent] = useState(false);
-
-//   const handleSendOtp = () => {
-//     // Here you can implement logic to send OTP to the provided mobile number
-//     // For this example, we'll just set a flag to simulate OTP sent
-//     setOtpSent(true);
-//   };
-
-//   const handleSignIn = () => {
-//     // Here you can implement logic to verify the OTP and sign the user in
-//     // For this example, we'll just show an alert
-//     alert("Signed in successfully!");
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-//       <div className="max-w-md w-full space-y-8">
-//         <div>
-//           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-//             Login
-//           </h2>
-//         </div>
-//         <form className="mt-8 space-y-6">
-//           <div className="rounded-md shadow-sm -space-y-px">
-//             <div>
-//               <label htmlFor="mobile-number" className="sr-only">
-//                 Mobile Number
-//               </label>
-//               <input
-//                 id="mobile-number"
-//                 name="mobile-number"
-//                 type="text"
-//                 autoComplete="tel"
-//                 required
-//                 value={mobileNumber}
-//                 onChange={(e) => setMobileNumber(e.target.value)}
-//                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//                 placeholder="Mobile Number"
-//               />
-//             </div>
-//             {otpSent && (
-//               <div>
-//                 <label htmlFor="otp" className="sr-only">
-//                   OTP
-//                 </label>
-//                 <input
-//                   id="otp"
-//                   name="otp"
-//                   type="text"
-//                   autoComplete="one-time-code"
-//                   required
-//                   value={otp}
-//                   onChange={(e) => setOtp(e.target.value)}
-//                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-//                   placeholder="OTP"
-//                 />
-//               </div>
-//             )}
-//           </div>
-
-//           {otpSent ? (
-//             <div className="flex items-center justify-between">
-//               <button
-//                 type="button"
-//                 onClick={handleSignIn}
-//                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-//               >
-//                 Sign In
-//               </button>
-//             </div>
-//           ) : (
-//             <div className="flex items-center justify-between">
-//               <button
-//                 type="button"
-//                 onClick={handleSendOtp}
-//                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-//               >
-//                 Send OTP
-//               </button>
-//             </div>
-//           )}
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LoginPage;
+    
