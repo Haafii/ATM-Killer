@@ -9,6 +9,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import MapContainer from './pages/path'
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/map" element={<Maps />} />
+          <Route path="/path" element={<MapContainer/>} />
         </Routes>
       </Router>
     </div>
