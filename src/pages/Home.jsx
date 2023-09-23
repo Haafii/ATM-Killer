@@ -154,7 +154,7 @@ function HomePage() {
                             />
                         </DialogContent>
                         <DialogActions className="p-4">
-                            <Link to={'/maps'}>
+                            <Link to={'/map'}>
 
                                 <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
                                     Search
@@ -182,7 +182,7 @@ function HomePage() {
                             />
                         </DialogContent>
                         <DialogActions className="p-4">
-                            <Link to={'/maps'}>
+                            <Link to={'/map'}>
 
                                 <Button onClick={openSearch} className="bg-red-500 text-white hover:bg-red-600">
                                     Search

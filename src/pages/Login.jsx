@@ -7,10 +7,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [otpSent, setOtpSent] = useState(false);
-
   const sendOTP = async (e) => {
     e.preventDefault();
-
     try {
       // Simulate a delay (replace this with your actual OTP sending logic)
       setIsLoading(true);
@@ -123,4 +121,3 @@ const Login = () => {
   )
 }
 export default Login
-    

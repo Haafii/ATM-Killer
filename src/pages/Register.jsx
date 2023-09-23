@@ -11,7 +11,7 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [otpSent, setOtpSent] = useState(false);
-
+    
     const sendOTP = async (e) => {
         if (accountNo !== confAccNo) {
             setError("Account numbers do not match");
