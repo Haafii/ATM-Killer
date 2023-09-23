@@ -24,11 +24,81 @@ const Login = () => {
       setIsLoading(false);
       setError("Failed to send OTP. Please try again."); // Handle error appropriately
     }
+
+
+    const url = 'http://35.203.92.18:8080/auth/login'; // Replace with the actual URL of your API
+
+        const data = {
+            phoneNumber: mobNum,
+        };
+        console.log(data)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify that you're sending JSON data
+            },
+            body: JSON.stringify(data), // Convert the data object to a JSON string
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then((responseData) => {
+                if(responseData.result == "AR"){
+                    setError("Mobile number already register")
+                }
+                // Handle the successful response here
+                console.log('Registration successful:', responseData);
+            })
+            .catch((error) => {
+                // Handle any errors that occurred during the fetch
+                console.error('Registration failed:', error);
+            });
+
+
   };
 
   const onLogin = (event) => {
     setIsLoading(true);
     event.preventDefault();
+
+    const url = 'http://35.203.92.18:8080/auth/submit-otp'; // Replace with the actual URL of your API
+
+        const data = {
+            otp: otp,
+            phoneNumber: mobNum,
+        };
+        console.log(data)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Specify that you're sending JSON data
+            },
+            body: JSON.stringify(data), // Convert the data object to a JSON string
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then((responseData) => {
+                if(responseData.result){
+                    navigate("/home");
+                }else{
+                    setIsLoading(false);
+                    setError(responseData.message);
+                    setError("Enter valid otp")
+                }
+                // Handle the successful response here
+                console.log('Registration successful:', responseData);
+            })
+            .catch((error) => {
+                // Handle any errors that occurred during the fetch
+                console.error('Registration failed:', error);
+            });
    
   };
 
