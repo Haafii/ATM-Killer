@@ -100,7 +100,7 @@ const Login = () => {
             })
             .then((responseData) => {
                 if(responseData.result){
-                    navigate("/home");
+                    navigate("/");
                 }else{
                     setIsLoading(false);
                     setError(responseData.message);
