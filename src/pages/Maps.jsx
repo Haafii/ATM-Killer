@@ -180,7 +180,7 @@ function App({ userLocation }) {
   ];
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyCd6CytIb5ffa3_9tjZvFsTc0fZCXOvZfk">
+    <LoadScript googleMapsApiKey="api-key">
       <MyMapComponent userLocation={userLocation} locations={nearestLocations} />
     </LoadScript>
   );
