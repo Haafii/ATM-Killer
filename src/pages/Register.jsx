@@ -72,9 +72,6 @@ const Login = () => {
     };
 
     const onLogin = (event) => {
-        if(error != NULL){
-            return;
-        }
         setIsLoading(true);
         event.preventDefault();
 
@@ -115,7 +112,7 @@ const Login = () => {
             });
 
     };
-    console.log(error);
+    // console.log(error);
     return (
         <div className="bg-primary flex flex-col items-center justify-center min-h-screen md:py-2">
             <main className="flex items-center w-full px-2 md:px-20">

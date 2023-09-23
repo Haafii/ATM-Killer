@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [mobNum,setMobNum] = useState("");
     const [otp, setOtp] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -109,11 +110,11 @@ const Login = () => {
           <p className='text-6xl text-blue-500 font-bold'>ATM Killer</p>
           <p className='font-medium text-lg leading-1 text-white'>Unlock Boundless Banking with ATM Killer.</p>
         </div>
-        <div className="bg-secondary rounded-2xl shadow-2xl flex flex-col w-full md:w-1/3 items-center max-w-4xl transition duration-1000 ease-out">
+        <div className="bg-secondary  rounded-2xl shadow-2xl flex flex-col w-full md:w-1/3 items-center max-w-4xl transition duration-1000 ease-out">
           <h2 className='p-3 text-3xl font-bold text-white'>ATM Killer</h2>
           <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div>
           <h3 className='text-xl font-semibold text-white pt-2 mb-2'>Welcome Back</h3>
-          <form className="mt-8 space-y-6 ">
+          <form className="mt-8 space-y-6 justify-center items-center flex flex-col">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <input
@@ -147,7 +148,7 @@ const Login = () => {
               </div>
             )}
           </div>
-
+          {error && <div className='text-red-600 text-sm font-bold'>{error}</div>}
           {otpSent ? (
             <div className="flex items-center justify-between">
               <button
